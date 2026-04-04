@@ -1,0 +1,344 @@
+@import "tailwindcss";
+
+/* ===== Custom Design Tokens ===== */
+@theme {
+  --color-dark-900: #030712;
+  --color-dark-800: #0a0e1a;
+  --color-dark-700: #111827;
+  --color-dark-600: #1e293b;
+  --color-dark-500: #334155;
+  --color-dark-400: #475569;
+  --color-dark-300: #64748b;
+
+  --color-neon: #00ff88;
+  --color-neon-dim: #00cc6a;
+  --color-neon-glow: #00ff8840;
+
+  --color-emergency: #ff0040;
+  --color-emergency-dim: #ef4444;
+  --color-emergency-glow: #ff004040;
+
+  --color-accent-blue: #3b82f6;
+  --color-accent-purple: #8b5cf6;
+  --color-accent-amber: #f59e0b;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* ===== Base Styles ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-dark-900);
+  color: #f1f5f9;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-dark-800);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-500);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-dim);
+}
+
+/* ===== Glassmorphism Utility Classes ===== */
+.glass {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-light {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-card {
+  background: rgba(17, 24, 39, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.glass-card:hover {
+  border-color: rgba(0, 255, 136, 0.2);
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.05);
+}
+
+/* ===== Glow Effects ===== */
+.glow-neon {
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.15), 0 0 60px rgba(0, 255, 136, 0.05);
+}
+
+.glow-emergency {
+  box-shadow: 0 0 20px rgba(255, 0, 64, 0.2), 0 0 60px rgba(255, 0, 64, 0.08);
+}
+
+.glow-text-neon {
+  text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.glow-text-emergency {
+  text-shadow: 0 0 20px rgba(255, 0, 64, 0.5);
+}
+
+/* ===== Animation Keyframes ===== */
+@keyframes pulse-neon {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(0, 255, 136, 0.4), 0 0 80px rgba(0, 255, 136, 0.1); }
+}
+
+@keyframes pulse-emergency {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 64, 0.3); }
+  50% { box-shadow: 0 0 50px rgba(255, 0, 64, 0.6), 0 0 100px rgba(255, 0, 64, 0.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes dash-move {
+  to { stroke-dashoffset: -20; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-pulse-neon {
+  animation: pulse-neon 2s ease-in-out infinite;
+}
+
+.animate-pulse-emergency {
+  animation: pulse-emergency 1.5s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* ===== Button Styles ===== */
+.btn-primary {
+  background: linear-gradient(135deg, #00ff88, #00cc6a);
+  color: #030712;
+  font-weight: 700;
+  padding: 12px 32px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-heading);
+  letter-spacing: 0.025em;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 255, 136, 0.3);
+}
+
+.btn-emergency {
+  background: linear-gradient(135deg, #ff0040, #ef4444);
+  color: white;
+  font-weight: 700;
+  padding: 12px 32px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-heading);
+  letter-spacing: 0.025em;
+}
+
+.btn-emergency:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 0, 64, 0.3);
+}
+
+.btn-outline {
+  background: transparent;
+  color: #00ff88;
+  font-weight: 600;
+  padding: 12px 32px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(0, 255, 136, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--font-heading);
+}
+
+.btn-outline:hover {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: #00ff88;
+  transform: translateY(-2px);
+}
+
+/* ===== Progress Bar ===== */
+.progress-bar-bg {
+  background: rgba(51, 65, 85, 0.5);
+  border-radius: 999px;
+  overflow: hidden;
+  height: 8px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== Map Styles ===== */
+.leaflet-container {
+  background: var(--color-dark-800) !important;
+  border-radius: 16px;
+}
+
+.leaflet-tile-pane {
+  filter: brightness(0.7) contrast(1.2) saturate(0.8) hue-rotate(180deg) invert(1);
+}
+
+.ambulance-marker {
+  animation: pulse-neon 2s ease-in-out infinite;
+  border-radius: 50%;
+}
+
+.hospital-marker {
+  filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.6));
+}
+
+/* ===== Skeleton Loader ===== */
+.skeleton {
+  background: linear-gradient(90deg, rgba(30, 41, 59, 0.5), rgba(51, 65, 85, 0.5), rgba(30, 41, 59, 0.5));
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ===== Floating Emergency Button ===== */
+.floating-emergency {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff0040, #ef4444);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-emergency 2s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.floating-emergency:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Data Grid ===== */
+.data-grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 768px) {
+  .data-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .data-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .data-grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ===== Leaflet Popup Override ===== */
+.leaflet-popup-content-wrapper {
+  background: rgba(17, 24, 39, 0.97) !important;
+  border: 1px solid rgba(0, 255, 136, 0.2) !important;
+  border-radius: 12px !important;
+  color: #f1f5f9 !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(17, 24, 39, 0.97) !important;
+}
+
+.leaflet-popup-close-button {
+  color: #94a3b8 !important;
+}
+
+/* ===== CSS Glow Pulse (replaces Framer Motion box-shadow animations) ===== */
+@keyframes glow-neon-pulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(0, 255, 136, 0.15); }
+  50% { box-shadow: 0 0 20px rgba(0, 255, 136, 0.3); }
+}
+
+@keyframes glow-emergency-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 64, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(255, 0, 64, 0.5); }
+}
+
+.animate-glow-neon {
+  animation: glow-neon-pulse 2s ease-in-out infinite;
+  will-change: box-shadow;
+}
+
+.animate-glow-emergency {
+  animation: glow-emergency-pulse 2s ease-in-out infinite;
+  will-change: box-shadow;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
